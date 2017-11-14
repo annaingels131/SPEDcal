@@ -6,7 +6,7 @@
   "USERNAME": "Username",
   "PASSWORD": "Password",
   "LOGIN": "Sign in",
-  "SIGNUP": "Register",
+  "SIGNUP": "Sign up",
 
   "TAB1_TITLE": "Items",
   "TAB2_TITLE": "Search",
@@ -28,7 +28,7 @@
 
   "TUTORIAL_SLIDE4_TITLE": "Ready to Play?",
 
-  "WELCOME_INTRO": "Hello",
+  "WELCOME_INTRO": "The starting point for your next great Ionic app",
 
   "SETTINGS_TITLE": "Settings",
   "SETTINGS_OPTION1": "Option 1",
