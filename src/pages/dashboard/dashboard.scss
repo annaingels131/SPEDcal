@@ -2,7 +2,7 @@
   position: absolute;
   background: url('../assets/img/Backgroundimg-01.svg') no-repeat transparent;
   background-size: cover;
-  height: 100vh;
+  height: 150%;
   width: 100vw;
   z-index: 1;
   background-repeat: repeat-x;
@@ -42,6 +42,10 @@
     color: #F7931E;
   }
 
+  @media only screen and (max-width: 576px) {
+    
+  }
+    
   // button.grouplist, button.studentlist{
   //   margin-top: 25px;
   //   background-color:#8CC63F;
