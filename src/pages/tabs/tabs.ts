@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController,  App } from 'ionic-angular';
+import { IonicPage, NavController, App, Nav } from 'ionic-angular';
+
 
 import { Tab1Root } from '../pages';
 import { Tab2Root } from '../pages';
@@ -12,6 +13,8 @@ import { Tab3Root } from '../pages';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild(Nav) nav: Nav;
+
   tab1Root: any = Tab1Root;
   tab2Root: any = Tab2Root;
   tab3Root: any = Tab3Root;
@@ -28,4 +31,9 @@ export class TabsPage {
     });
   }
 
+  // openPage(page) {
+  //   // Reset the content nav to have just this page
+  //   // we wouldn't want the back button to show in this scenario
+  //   this.nav.setRoot(page.component);
+  // }
 }

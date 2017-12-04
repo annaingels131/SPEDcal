@@ -16,7 +16,11 @@ export class ItemDetailPage {
   @ViewChild('barCanvas') barCanvas;
 
   barChart: any;
-
+  iconsMonday = [];
+  iconsTuesday = [];
+  iconsWednesday =[];
+  iconsThursday = [];
+  iconsFriday = [];
   item: any;
   form: FormGroup;
 
@@ -28,6 +32,16 @@ export class ItemDetailPage {
     students: Items) {
       this.item = navParams.get('item') || students.defaultItem;
       console.log('data', students.query());
+
+      //generates number place hold on itemReorder
+      for (let x=0; x <10; x++){
+        this.iconsMonday.push(x)
+        this.iconsTuesday.push(x)
+        this.iconsWednesday.push(x)
+        this.iconsThursday.push(x)
+        this.iconsFriday.push(x)
+
+    }
   }
 
   openItem() {
@@ -89,4 +103,36 @@ export class ItemDetailPage {
 
     });
   }
+
+  reorderIconsMonday(indexes) {
+    let element = this.iconsMonday[indexes.from];
+    this.iconsMonday.splice(indexes.from, 1);
+    this.iconsMonday.splice(indexes.to, 0, element);
+    console.log("Monday", indexes)
+  }
+  reorderIconsTuesday(indexes) {
+    let element = this.iconsTuesday[indexes.from];
+    this.iconsTuesday.splice(indexes.from, 1);
+    this.iconsTuesday.splice(indexes.to, 0, element);
+    console.log("Tuesday", indexes)
+  }
+  reorderIconsWednesday(indexes) {
+    let element = this.iconsWednesday[indexes.from];
+    this.iconsWednesday.splice(indexes.from, 1);
+    this.iconsWednesday.splice(indexes.to, 0, element);
+    console.log("Wednesday", indexes)
+  }
+  reorderIconsThursday(indexes) {
+    let element = this.iconsThursday[indexes.from];
+    this.iconsThursday.splice(indexes.from, 1);
+    this.iconsThursday.splice(indexes.to, 0, element);
+    console.log("Thursday", indexes)
+  }
+  reorderIconsFriday(indexes) {
+    let element = this.iconsFriday[indexes.from];
+    this.iconsFriday.splice(indexes.from, 1);
+    this.iconsFriday.splice(indexes.to, 0, element);
+    console.log("friday", indexes)
+  }
+
 }
