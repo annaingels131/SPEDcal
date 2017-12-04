@@ -7,19 +7,36 @@ import { Items } from '../../providers/providers';
 @IonicPage()
 @Component({
   selector: 'page-list-master',
-  templateUrl: 'list-master.html'
+  templateUrl: 'list-master.html',
+  providers: [Items]
 })
 export class ListMasterPage {
-  currentItems: Item[];
+  currentItems: any;
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+    this.getEvents();
   }
 
   /**
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+  }
+
+  doRefresh(refresh){
+    setTimeout(() => {
+      this.items.query().then(data => {
+        this.currentItems = data;
+      }); 
+      refresh.complete();
+     }, 1000);
+  }
+
+  getEvents() {
+    this.items.query()
+    .then(data => {
+      this.currentItems = data;
+    });
   }
 
   /**
@@ -31,6 +48,7 @@ export class ListMasterPage {
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
+        this.getEvents();
       }
     })
     addModal.present();
@@ -39,8 +57,10 @@ export class ListMasterPage {
   /**
    * Delete an item from the list of items.
    */
-  deleteItem(item) {
-    this.items.delete(item);
+  deleteItem(id, event) {
+    this.items.delete(id);
+    let index: number = this.currentItems.indexOf(event);
+    this.currentItems.splice(index, 1);
   }
 
   /**

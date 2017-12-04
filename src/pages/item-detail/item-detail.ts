@@ -3,12 +3,14 @@ import { IonicPage, NavController, NavParams, ViewController,ModalController } f
 import { Chart } from 'chart.js';
 import { Items } from '../../providers/providers';
 import { Item } from '../../models/item';
+import { TodaysSchedulePage } from '../todays-schedule/todays-schedule';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
   selector: 'page-item-detail',
-  templateUrl: 'item-detail.html'
+  templateUrl: 'item-detail.html',
+  providers: [Items]
 })
 export class ItemDetailPage {
   @ViewChild('barCanvas') barCanvas;
@@ -27,15 +29,17 @@ export class ItemDetailPage {
     navParams: NavParams,
     public modalCtrl: ModalController,
     public viewCtrl: ViewController,
-    items: Items) {
-    this.item = navParams.get('item') || items.defaultItem;
+    students: Items) {
+      this.item = navParams.get('item') || students.defaultItem;
+      console.log('data', students.query());
 
-    for (let x=0; x <10; x++){
-      this.iconsMonday.push(x)
-      this.iconsTuesday.push(x)
-      this.iconsWednesday.push(x)
-      this.iconsThursday.push(x)
-      this.iconsFriday.push(x)
+      //generates number place hold on itemReorder
+      for (let x=0; x <10; x++){
+        this.iconsMonday.push(x)
+        this.iconsTuesday.push(x)
+        this.iconsWednesday.push(x)
+        this.iconsThursday.push(x)
+        this.iconsFriday.push(x)
 
     }
   }
@@ -45,6 +49,12 @@ export class ItemDetailPage {
         console.log("working");
         modal.present();
       }
+
+  openSchedule() {
+            let modal = this.modalCtrl.create('TodaysSchedulePage');
+            console.log("working");
+            modal.present();
+          }
 
   ionViewDidLoad() {
     this.barChart = new Chart(this.barCanvas.nativeElement, {

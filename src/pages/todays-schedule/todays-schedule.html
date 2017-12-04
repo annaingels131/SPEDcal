@@ -1,0 +1,64 @@
+<!--
+  Generated template for the TodaysSchedulePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--
+  Generated template for the TasksPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-toolbar color=primary>
+    <ion-title text-center class="title-day">
+      MONDAY
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="second" class="button-x-size">X</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-img item-left class="img-task-size" src="/assets/img/breakfast.png"></ion-img>
+      <ion-label class="label-task-font" >Breakfast</ion-label>
+      <ion-checkbox item-right [(ngModel)]="Breakfast"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-img item-left class="img-task-size" src="/assets/img/Circle time.png"></ion-img>
+      <ion-label class="label-task-font" >Circle Time</ion-label>
+      <ion-checkbox item-right [(ngModel)]="Circle-Time"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-img item-left class="img-task-size" src="/assets/img/Reading.png"></ion-img>
+      <ion-label class="label-task-font" >Reading</ion-label>
+      <ion-checkbox item-right [(ngModel)]="Reading"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-img item-left class="img-task-size" src="/assets/img/recess.png"></ion-img>
+      <ion-label class="label-task-font" >Recess</ion-label>
+      <ion-checkbox item-right [(ngModel)]="Recess"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-img item-left class="img-task-size" src="/assets/img/speech.png"></ion-img>
+      <ion-label class="label-task-font" >Speech</ion-label>
+      <ion-checkbox item-right [(ngModel)]="Speech"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-img item-left class="img-task-size" src="/assets/img/lunch.png"></ion-img>
+      <ion-label class="label-task-font" >Lunch</ion-label>
+      <ion-checkbox item-right [(ngModel)]="Lunch"></ion-checkbox>
+    </ion-item>
+
+
+
+  </ion-list>
+
+</ion-content>

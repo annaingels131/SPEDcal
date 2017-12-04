@@ -21,9 +21,9 @@
         <ion-avatar item-start>
           <img [src]="item.profilePic" />
         </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>Group: {{item.groupNumber}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <h2>{{item.first_name}} {{item.last_name}}</h2>
+        <p>Group: {{item.group_number}}</p>
+        <ion-note item-end *ngIf="item.notes">{{item.notes}}</ion-note>
       </button>
 
       <ion-item-options>

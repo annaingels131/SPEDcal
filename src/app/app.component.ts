@@ -43,7 +43,7 @@ export class MyApp {
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' },
-    { title: 'Grouplist', component: 'GrouplistPage'}
+    { title: 'Grouplist', component: 'GrouplistPage'},
 
   ]
 
