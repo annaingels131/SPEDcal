@@ -46,7 +46,7 @@ export class TasksPage {
     in:false
   },
   {
-    name:'Occupational Therapy',
+    name:'Therapy',
     in:false
   },
   {
