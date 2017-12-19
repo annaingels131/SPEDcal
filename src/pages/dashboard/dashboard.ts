@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ListMasterPage} from '../list-master/list-master';
 
@@ -10,12 +10,12 @@ import { ListMasterPage} from '../list-master/list-master';
   templateUrl: 'dashboard.html'
 })
 export class Dashboard {
-
+  teacher: any;
   constructor(
-    public navCtrl: NavController,
+    public navCtrl: NavController, public navParams: NavParams
   ){
 
-      }
+  }
 
   openStudents() {
     this.navCtrl.push('ListMasterPage');

@@ -5,6 +5,7 @@ import { Group } from '../../models/group';
 import { Groups } from '../../providers/providers';
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
+import { User } from '../../providers/providers';
 
 
 
@@ -17,9 +18,12 @@ import { Items } from '../../providers/providers';
 export class GrouplistPage {
   currentGroups: any;
   currentItems: any;
+  classGroups: any;
+  teacher: any;
 
-  constructor(public navCtrl: NavController, public groups: Groups, public items: Items, public navParams: NavParams) {
-      this.currentGroups = this.groups.query();
+  constructor(public navCtrl: NavController, public _class: User,public groups: Groups, public items: Items, public navParams: NavParams) {
+      this.currentGroups = _class.getTeacher().groups;
+      this.teacher = _class.getTeacher();
       this.getEvents();
   }
 
@@ -40,14 +44,18 @@ export class GrouplistPage {
     this.navCtrl.push('GroupDetailPage', {
       group: group,
       currentItems: this.currentItems
-
     });
   }
 
   getEvents() {
-    this.items.query()
+    this.items.query(this.teacher._id)
     .then(data => {
       this.currentItems = data;
     });
+  }
+
+  getGroups() {
+    // todo
+    return this.teacher;
   }
 }

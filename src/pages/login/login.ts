@@ -3,12 +3,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
+import { Items } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  providers : [Items]
 })
 export class LoginPage {
   // The account fields for the login form.
@@ -35,27 +37,25 @@ export class LoginPage {
   // Attempt to login in through our User service
   doLogin() {
     this.user.login(this.account).subscribe((resp) => {
-      console.log(resp);
-      //if(resp) {
-        this.navCtrl.push(MainPage);
-      /*} else {
+      if(resp) {
+        this.user.setTeacher(resp);
+        this.navCtrl.push(MainPage, {teacher: resp});
+      } else {
         let toast = this.toastCtrl.create({
           message: this.loginErrorString,
           duration: 3000,
           position: 'top'
         });
         toast.present();
-      }*/
+      }
     }, (err) => {
-      this.navCtrl.push(MainPage);
       // Unable to log in
-      /*let toast = this.toastCtrl.create({
+      let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
         position: 'top'
       });
       toast.present();
-    });*/
   });
 }
 }

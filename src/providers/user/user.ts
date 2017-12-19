@@ -26,8 +26,11 @@ import { Api } from '../api/api';
 @Injectable()
 export class User {
   _user: any;
+  public teacher: any;
 
-  constructor(public api: Api) { }
+  constructor(public api: Api) { 
+    this.teacher = {};
+  }
 
   /**
    * Send a POST request to our login endpoint with the data
@@ -47,6 +50,16 @@ export class User {
     });
 
     return seq;
+  }
+
+  setTeacher(teacher) {
+    this.teacher = teacher;
+    console.log(this.teacher);
+  }
+
+  getTeacher() {
+    console.log("get");
+    return this.teacher;
   }
 
   /**

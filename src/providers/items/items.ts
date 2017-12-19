@@ -6,13 +6,14 @@ import { Api } from '../api/api';
 @Injectable()
 export class Items {
 
-  defaultItem: any = {
-    
+  defaultItem: any = {  
   };
-
   data: any = [];
+  teacher: any;
 
-  constructor(public api: Api) { }
+  constructor(public api: Api) { 
+    this.teacher = {};
+  }
 
   query(params?: any) {
 
@@ -48,8 +49,8 @@ export class Items {
 
   }
 
-  updateCal(item: Item, id) {
-    this.api.post('students/cal', item, id)
+  updateCal(student: Item, id) {
+    this.api.post('students/cal', student, id)
     .subscribe(data => {
       console.log(data);
    }, error => {
@@ -57,8 +58,8 @@ export class Items {
    });
   }
 
-  add(item: Item) {
-    this.api.post('events', item)
+  add(student: Item) {
+    this.api.post('new/student', student)
     .subscribe(data => {
        console.log(data);
     }, error => {
@@ -66,8 +67,8 @@ export class Items {
     });
   }
 
-  delete(item: string) {
-    this.api.delete('students', item)
+  delete(student: string) {
+    this.api.delete('remove/student', student)
     .subscribe(data => {
        console.log(data);
     }, error => {

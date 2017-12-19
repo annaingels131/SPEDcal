@@ -29,15 +29,8 @@ export class Api {
 
     // Support easy query params for GET requests
      if (params) {
-      reqOpts.params = new HttpParams();
-      for (let k in params) {
-        reqOpts.params.set(k, params[k]);
-        console.log("params")
-      }
-
-      let loc = params.title;
       
-      return this.http.get(this.url + '/' + endpoint + "/" + loc);
+      return this.http.get(this.url + '/' + endpoint + "/" + params);
 
     }
 

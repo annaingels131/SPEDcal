@@ -3,6 +3,8 @@ import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
+import { User } from '../../providers/providers';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 @IonicPage()
 @Component({
@@ -12,9 +14,11 @@ import { Items } from '../../providers/providers';
 })
 export class ListMasterPage {
   currentItems: any;
+  public teacher: any = {};
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.getEvents();
+  constructor(public navCtrl: NavController, public _class: User, public items: Items, public modalCtrl: ModalController, public nav: NavParams) {
+    this.teacher = this._class.getTeacher(); 
+    this.getStudents(this._class.getTeacher()._id);
   }
 
   /**
@@ -32,8 +36,8 @@ export class ListMasterPage {
      }, 1000);
   }
 
-  getEvents() {
-    this.items.query()
+  getStudents(teacher) {
+    this.items.query(teacher)
     .then(data => {
       this.currentItems = data;
     });
@@ -48,7 +52,7 @@ export class ListMasterPage {
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
-        this.getEvents();
+        this.getStudents(this.teacher);
       }
     })
     addModal.present();
@@ -57,9 +61,9 @@ export class ListMasterPage {
   /**
    * Delete an item from the list of items.
    */
-  deleteItem(id, event) {
-    this.items.delete(id);
-    let index: number = this.currentItems.indexOf(event);
+  deleteItem(student) {
+    this.items.delete(student._id);
+    let index: number = this.currentItems.indexOf(student);
     this.currentItems.splice(index, 1);
   }
 

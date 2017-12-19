@@ -16,7 +16,7 @@ export class Groups {
   constructor(public api: Api) { }
 
   query(params?: any) {
-    return this.api.get('/groups', params);
+    return this.api.get('/users', params);
   }
 
   add(group: Group) {
