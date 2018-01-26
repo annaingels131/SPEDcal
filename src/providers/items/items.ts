@@ -76,4 +76,21 @@ export class Items {
     });
   }
 
+  getStudentsByGroup(group) {
+    return new Promise(resolve => {
+      this.api.get('students/by-group', group)
+      .map(data => {
+        return data;
+      })
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
+    });
+  }
+
+  getGroupByGroups() {
+    // lodash
+  }
+
 }

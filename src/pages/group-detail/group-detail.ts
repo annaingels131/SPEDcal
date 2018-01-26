@@ -5,7 +5,7 @@ import { Groups } from '../../providers/providers';
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
 import { TodaysSchedulePage } from '../todays-schedule/todays-schedule';
-
+import { GroupMembersPage } from '../group-members/group-members';
 /**
  * Generated class for the GroupDetailPage page.
  *
@@ -24,6 +24,7 @@ export class GroupDetailPage {
   students: any;
   members = [];
   item: any;
+  allGroups: any;
 
   constructor(
     public navCtrl: NavController,
@@ -31,25 +32,23 @@ export class GroupDetailPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public viewCtrl: ViewController,
-    students: Groups,) {
-      this.group = navParams.get('group') || students.defaultGroup;
+  ) {
+      this.group = navParams.get('group') || 0;
       this.students = navParams.get('currentItems');
-      console.log(this.students);
+      this.allGroups = navParams.get('allGroups');
       this.getMembers(navParams.get('currentItems'));
-      console.log(this.students);
-
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GroupDetailPage');
   }
 
   getMembers(students){
-    for(let i=0; i<students.length; i++){
-    if(students[i].group_number == this.group.id){
-    this.members.push(students[i]
-    );}
+    for(let i=0; i<students.length; i++) {
+      if(this.group.members.indexOf(students[i]._id) > -1) {
+        this.members.push(students[i]);
+      }
     }
+    return this.members;
   }
 
   openSchedule(student: Item) {
@@ -59,6 +58,16 @@ export class GroupDetailPage {
     modal.present();
     modal.onDidDismiss(() => {
 
+    });
+  }
+
+  editGroup() {
+    let modal = this.modalCtrl.create('GroupMembersPage', {
+      currentItems: this.students, group: this.group, allGroups: this.allGroups
+    });
+    modal.present();
+    modal.onDidDismiss(() => {
+      this.viewCtrl.dismiss();
     });
   }
 

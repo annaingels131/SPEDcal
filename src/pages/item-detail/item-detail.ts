@@ -5,6 +5,7 @@ import { Items } from '../../providers/providers';
 import { Item } from '../../models/item';
 import { TodaysSchedulePage } from '../todays-schedule/todays-schedule';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class ItemDetailPage {
   calWednesday: any;
   calThursday: any;
   calFriday: any;
+  groups = [];
 
   percents = [
     {
@@ -54,10 +56,11 @@ export class ItemDetailPage {
     navParams: NavParams,
     public modalCtrl: ModalController,
     public viewCtrl: ViewController,
+    public _teacher: User,
     public students: Items) {
+      this.getStudentGroups(navParams.get('item'));
       this.student = navParams.get('item');
       this.item = navParams.get('item') || students.defaultItem;
-      console.log('item', this.item);
       this.getTaskStatus();
       this.setPercents();
       // calls tasks for individual days
@@ -66,9 +69,29 @@ export class ItemDetailPage {
       this.calWednesday = this.student.calendar[2].tasks;
       this.calThursday = this.student.calendar[3].tasks;
       this.calFriday = this.student.calendar[4].tasks;
-
-
   }
+
+  _getAllGroupIndexes(arr, val) {
+    let indexes = [], i, j;
+    for(i=0; i < arr.length; i++){
+      for(j=0; j < arr[i].members.length; j++)
+        if (arr[i].members[j] === val)
+          indexes.push(i);
+    }
+    return indexes;
+  }
+
+  getStudentGroups(student) {
+    let all = this._teacher.getTeacher().groups;
+    let locs = this._getAllGroupIndexes(all, student._id);
+    for(let a=0; a<all.length; a++){
+      if(all[a].members.indexOf(student._id)> -1)
+        this.groups.push({id: all[a].id, name: all[a].name})
+    }
+    console.log(this.groups);
+    return this.groups;
+  }
+
   openItem(item: Item, day) {
      let modal = this.modalCtrl.create('TasksPage', {
        item: item, day: day
@@ -88,9 +111,6 @@ export class ItemDetailPage {
     });
   }
 
-  /****
-   * needs to be linked to button
-   */
   resetCalendar() {
     for(let i=0; i<5; i++){
       for(let j=0; j<this.item.calendar[i].tasks.length; j++){
@@ -201,35 +221,29 @@ export class ItemDetailPage {
     this.calMonday.splice(indexes.from, 1);
     this.calMonday.splice(indexes.to, 0, element);
     this.students.updateCal(this.item, this.item._id);
-    // console.log("Monday", indexes.from, indexes.to)
-    // console.log(this.student.calendar[0])
   }
   reorderIconsTuesday(indexes) {
     let element = this.calTuesday[indexes.from];
     this.calTuesday.splice(indexes.from, 1);
     this.calTuesday.splice(indexes.to, 0, element);
     this.students.updateCal(this.item, this.item._id);
-    // console.log("Tuesday", indexes)
   }
   reorderIconsWednesday(indexes) {
     let element = this.calWednesday[indexes.from];
     this.calWednesday.splice(indexes.from, 1);
     this.calWednesday.splice(indexes.to, 0, element);
     this.students.updateCal(this.item, this.item._id);
-    // console.log("Wednesday", indexes)
   }
   reorderIconsThursday(indexes) {
     let element = this.calThursday[indexes.from];
     this.calThursday.splice(indexes.from, 1);
     this.calThursday.splice(indexes.to, 0, element);
     this.students.updateCal(this.item, this.item._id);
-    // console.log("Thursday", indexes)
   }
   reorderIconsFriday(indexes) {
     let element = this.calFriday[indexes.from];
     this.calFriday.splice(indexes.from, 1);
     this.calFriday.splice(indexes.to, 0, element);
     this.students.updateCal(this.item, this.item._id);
-    // console.log("friday", indexes)
   }
 }

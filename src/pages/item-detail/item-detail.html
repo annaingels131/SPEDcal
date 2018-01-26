@@ -18,7 +18,11 @@
         <div class="item-detail" padding>
           <button ion-button id="btn">Edit</button>
           <h2>{{ item.first_name }} {{ item.last_name }}</h2>
-          <p>Group Number: {{item.group_number}} </p>
+          <p> Groups:
+            <span >
+              {{groups}}
+            </span>
+          </p>  
           <p>Notes: </p>
         </div>
       </ion-col>

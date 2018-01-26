@@ -21,8 +21,8 @@ export class GrouplistPage {
   classGroups: any;
   teacher: any;
 
-  constructor(public navCtrl: NavController, public _class: User,public groups: Groups, public items: Items, public navParams: NavParams) {
-      this.currentGroups = _class.getTeacher().groups;
+  constructor(public navCtrl: NavController, public _class: User, public groups: Groups, public items: Items, public navParams: NavParams) {
+      this.getGroups(_class.getTeacher()._id);
       this.teacher = _class.getTeacher();
       this.getEvents();
   }
@@ -43,7 +43,8 @@ export class GrouplistPage {
   openItem(group: Group) {
     this.navCtrl.push('GroupDetailPage', {
       group: group,
-      currentItems: this.currentItems
+      currentItems: this.currentItems,
+      allGroups: this.currentGroups
     });
   }
 
@@ -54,8 +55,10 @@ export class GrouplistPage {
     });
   }
 
-  getGroups() {
-    // todo
-    return this.teacher;
+  getGroups(id) {
+    this.groups.getGroups(id)
+    .then(data => {
+      this.currentGroups = data;
+    });
   }
 }

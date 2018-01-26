@@ -8,6 +8,11 @@
 
   <ion-navbar color="third">
     <ion-title>Group Number {{group.id}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="editGroup()">
+        <ion-icon>+</ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

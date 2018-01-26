@@ -42,21 +42,10 @@ export class LoginPage {
         this.user.setTeacher(resp);
         this.navCtrl.push(MainPage, {teacher: resp});
       } else {
-        let toast = this.toastCtrl.create({
-          message: this.loginErrorString,
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
+        this.loginErr();
       }
     }, (err) => {
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.loginErr();
   });
 }
 
